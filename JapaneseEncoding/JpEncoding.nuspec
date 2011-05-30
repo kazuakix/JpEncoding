@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
+  <metadata>
+    <id>Japanese.Text.Encoding</id>
+    <version>1.0</version>
+    <title>JpEncoding</title>
+    <authors>tmyt,kazuakix</authors>
+    <owners>tmyt,kazuakix</owners>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>Japanese custom Encodings for Windows Phone 7</description>
+    <language>en-US</language>
+    <tags>wp7,wp7dev</tags>
+  </metadata>
+  <files>
+    <file src="bin\Release\*.dll" target="lib" />
+  </files>
+</package>
