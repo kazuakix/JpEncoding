@@ -7515,10 +7515,12 @@ namespace Japanese.Text.Encoding
                         r++;
                         break;
                     case EncodingState.Kanji:
-                        if (bytes[i] > 0x20 && i + 1 <= (index + count))
+                        if (bytes[i] > 0x20)
                         {
-                            ushort c = (ushort)(bytes[i] << 8 | bytes[i + 1]);
-                            i++;
+                            if (i + 1 < (index + count))
+                            {
+                                i++;
+                            }
                         }
                         r++;
                         break;
@@ -7624,13 +7626,20 @@ namespace Japanese.Text.Encoding
                         r++;
                         break;
                     case EncodingState.Kanji:
-                        if (bytes[i] > 0x20 && i + 1 <= (byteIndex + byteCount))
+                        if (bytes[i] > 0x20)
                         {
-                            ushort c = (ushort)(bytes[i] << 8 | bytes[i + 1]);
-                            if (jisx0208.ContainsKey(c))
-                                chars[r + charIndex] = jisx0208[c];
+                            if (i + 1 < (byteIndex + byteCount))
+                            {
+                                ushort c = (ushort)(bytes[i] << 8 | bytes[i + 1]);
+                                if (jisx0208.ContainsKey(c))
+                                    chars[r + charIndex] = jisx0208[c];
+                                else
+                                    chars[r + charIndex] = FallbackChar;
+                            }
                             else
+                            {
                                 chars[r + charIndex] = FallbackChar;
+                            }
                             i++;
                         }
                         else

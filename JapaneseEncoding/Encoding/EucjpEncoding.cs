@@ -2,6 +2,9 @@
 {
     public class EucjpEncoding : System.Text.Encoding
     {
+        const char FallbackChar = '?';
+        const byte FallbackByte = 0x3f;
+
         // 2バイトのeucjpをsjisに変換する
         private void eucjp2sjis(ref byte sjis, ref byte sjis2)
         {
@@ -61,7 +64,10 @@
                     continue;
                 }
                 if (++i == count)
+                {
+                    n++;
                     break;
+                }
                 byte c2 = sjis[index + i];
                 if (c1 < 0x40 || (c1 > 0x7E && c1 < 0x80) || c1 > 0xFC)
                 {
@@ -91,7 +97,10 @@
                     continue;
                 }
                 if (++i == count)
+                {
+                    buffer[n++] = FallbackByte;
                     break;
+                }
                 byte c2 = sjis[index + i];
                 if (c1 < 0x40 || (c1 > 0x7E && c1 < 0x80) || c1 > 0xFC)
                 {
@@ -119,7 +128,10 @@
                     continue;
                 }
                 if (++i == count)
+                {
+                    n++;
                     break;
+                }
                 byte c2 = eucjp[index + i];
                 if (c1 == 0x8E)
                 {
@@ -145,7 +157,10 @@
                     continue;
                 }
                 if (++i == count)
+                {
+                    buffer[n++] = FallbackByte;
                     break;
+                }
                 byte c2 = eucjp[index + i];
                 if (c1 == 0x8E)
                 {

@@ -50,6 +50,12 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Encoding\SjisEncoding.cs" />
     <Compile Include="Utility\DetectEncoding.cs" />
+    <Compile Include="Utility\Validator\EucjpSequenceValidator.cs" />
+    <Compile Include="Utility\Validator\JisSequenceValidator.cs" />
+    <Compile Include="Utility\Validator\SequenceValidator.cs" />
+    <Compile Include="Utility\Validator\SjisSequenceValidator.cs" />
+    <Compile Include="Utility\Validator\Utf16SequenceValidator.cs" />
+    <Compile Include="Utility\Validator\Utf8SequenceValidator.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="JpEncoding.nuspec" />

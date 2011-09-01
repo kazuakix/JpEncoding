@@ -48,15 +48,22 @@ namespace Japanese.Text.Encoding
                     }
                     outChars++;
                 }
-                else if (((0x81 <= b && b <= 0x9F) || (0xE0 <= b && b <= 0xEF)) && i + 1 < byteCount)
+                else if (((0x81 <= b && b <= 0x9F) || (0xE0 <= b && b <= 0xEF)))
                 {
-                    // Shift_JIS マルチバイト
-                    ushort s = (ushort)(((ushort)b << 8) | (ushort)bytes[byteIndex + i + 1]);
-                    i++;
-
-                    if (Jis0208Table.TryGetValue(s, out c))
+                    if (i + 1 < byteCount)
                     {
-                        chars[charIndex + outChars] = c;
+                        // Shift_JIS マルチバイト
+                        ushort s = (ushort)(((ushort)b << 8) | (ushort)bytes[byteIndex + i + 1]);
+                        i++;
+
+                        if (Jis0208Table.TryGetValue(s, out c))
+                        {
+                            chars[charIndex + outChars] = c;
+                        }
+                        else
+                        {
+                            chars[charIndex + outChars] = FallbackChar;
+                        }
                     }
                     else
                     {
