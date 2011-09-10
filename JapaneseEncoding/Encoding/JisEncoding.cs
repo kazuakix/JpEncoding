@@ -7371,9 +7371,9 @@ namespace Japanese.Text.Encoding
                         if (es != EncodingState.Kanji)
                         {
                             es = EncodingState.Kanji;
-                            bytes[r + byteIndex + 3] = 0x1B;
-                            bytes[r + byteIndex + 4] = 0x24;
-                            bytes[r + byteIndex + 5] = 0x42;
+                            bytes[r + byteIndex + 0] = 0x1B;
+                            bytes[r + byteIndex + 1] = 0x24;
+                            bytes[r + byteIndex + 2] = 0x42;
                             r += 3;
                         }
                         ushort us = getKeyFromValue(jisx0208, halfKana2fullKana(chars[i]));
@@ -7418,9 +7418,9 @@ namespace Japanese.Text.Encoding
                     if (es != EncodingState.Kanji)
                     {
                         es = EncodingState.Kanji;
-                        bytes[r + byteIndex + 3] = 0x1B;
-                        bytes[r + byteIndex + 4] = 0x24;
-                        bytes[r + byteIndex + 5] = 0x42;
+                        bytes[r + byteIndex + 0] = 0x1B;
+                        bytes[r + byteIndex + 1] = 0x24;
+                        bytes[r + byteIndex + 2] = 0x42;
                         r += 3;
                     }
                     ushort us = getKeyFromValue(jisx0208, chars[i]);
