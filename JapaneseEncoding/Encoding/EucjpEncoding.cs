@@ -31,21 +31,25 @@
         // 2バイトのsjisをeucjpに変換する
         private void sjis2eucjp(ref byte euc1, ref byte euc2)
         {
-            euc1 -= 0x80;
-            euc2 -= 0x80;
+            // こちらのコードを使っています
+            // http://homepage3.nifty.com/aokura/src/ms2euc.html
 
-            if ((euc1 % 2) != 0)
+            euc1 <<= 1;
+            if (euc2 < 0x9f)
             {
-                euc1 = (byte)(((euc1 + 1) / 2) + 0x70);
-                euc2 += 0x1f;
+                if (euc1 < 0x3f)    euc1 -= 0x61;
+                else                euc1 += 0x1f;
+
+                if (euc2 > 0x7E)    euc2 += 0x60;
+                else                euc2 += 0x61;
             }
             else
             {
-                euc1 = (byte)((euc1 / 2) + 0x70);
-                euc2 += 0x7d;
+                if (euc1 < 0x3F)    euc1 -= 0x60;
+                else                euc1 += 0x20;
+
+                                    euc2 += 0x02;
             }
-            if (euc1 >= 0xa0) { euc1 += 0x40; }
-            if (euc2 >= 0x7f) { euc2 += 1; }
         }
 
         // sjisからeucjpに変換したときのバイト数を返す
